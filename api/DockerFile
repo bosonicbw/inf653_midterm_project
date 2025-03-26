@@ -1,0 +1,14 @@
+# Use PHP with Apache
+FROM php:8.1-apache
+
+# Install PostgreSQL support
+RUN docker-php-ext-install pdo pdo_pgsql
+
+# Enable mod_rewrite (not strictly required if you're not using pretty URLs)
+RUN a2enmod rewrite
+
+# Copy code
+COPY . /var/www/html/
+
+# Set working directory
+WORKDIR /var/www/html
