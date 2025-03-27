@@ -121,6 +121,26 @@ switch($method) {
             $quote->quote = $data->quote;
             $quote->author_id = $data->author_id;
             $quote->category_id = $data->category_id;
+
+            // Needed Author check to comply with tester website critera
+            $checkAuthor = $db->prepare("SELECT id FROM authors WHERE id = :id");
+            $checkAuthor->bindParam(':id', $quote->author_id);
+            $checkAuthor->execute();
+            if ($checkAuthor->rowCount() === 0) {
+                echo json_encode(['message' => 'author_id Not Found']);
+                break;
+            }
+
+            // Needed Category check to comply with tester website criteria
+            $checkCategory = $db->prepare("SELECT id FROM categories WHERE id = :id");
+            $checkCategory->bindParam(':id', $quote->category_id);
+            $checkCategory->execute();
+            if ($checkCategory->rowCount() === 0) {
+                echo json_encode(['message' => 'category_id Not Found']);
+                break;
+            }
+
+            // And check required elements...
             if ($quote->create()) {
                 echo json_encode([
                     'id' => $db->lastInsertId(),
@@ -147,6 +167,26 @@ switch($method) {
             $quote->quote = $data->quote;
             $quote->author_id = $data->author_id;
             $quote->category_id = $data->category_id;
+
+            // Needed Author check to comply with tester website critera
+            $checkAuthor = $db->prepare("SELECT id FROM authors WHERE id = :id");
+            $checkAuthor->bindParam(':id', $quote->author_id);
+            $checkAuthor->execute();
+            if ($checkAuthor->rowCount() === 0) {
+                echo json_encode(['message' => 'author_id Not Found']);
+                break;
+            }
+
+            // Needed Category check to comply with tester website criteria
+            $checkCategory = $db->prepare("SELECT id FROM categories WHERE id = :id");
+            $checkCategory->bindParam(':id', $quote->category_id);
+            $checkCategory->execute();
+            if ($checkCategory->rowCount() === 0) {
+                echo json_encode(['message' => 'category_id Not Found']);
+                break;
+            }
+
+            // And check required elements...
             if ($quote->update()) {
                 echo json_encode([
                     'id' => $quote->id,
@@ -155,7 +195,7 @@ switch($method) {
                     'category_id' => $quote->category_id
                 ]);
             } else {
-                echo json_encode(['message' => 'Quote Not Updated']);
+                echo json_encode(['message' => 'No Quotes Found']);
             }
         } else {
             echo json_encode(['message' => 'Missing Required Parameters']);
