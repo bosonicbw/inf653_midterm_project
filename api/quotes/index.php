@@ -149,10 +149,10 @@ switch($method) {
                     'category_id' => $quote->category_id
                 ]);
             } else {
-                echo json_encode(['message' => 'Quote Not Created']);
+                echo json_encode(['message' => 'No Quotes Found']);
             }
         } else {
-            echo json_encode(['message' => 'Missing Required Parameters']);
+            echo json_encode(['message' => 'No Quotes Found']);
         }
         break;
 
@@ -198,7 +198,7 @@ switch($method) {
                 echo json_encode(['message' => 'No Quotes Found']);
             }
         } else {
-            echo json_encode(['message' => 'Missing Required Parameters']);
+            echo json_encode(['message' => 'No Quotes Found']);
         }
         break;
 
@@ -216,7 +216,7 @@ switch($method) {
                 echo json_encode(['message' => 'No Quotes Found']);
             }
         } else {
-            echo json_encode(['message' => 'Missing Required Parameters']);
+            echo json_encode(['message' => 'No Quotes Found']);
         }
         break;
 
