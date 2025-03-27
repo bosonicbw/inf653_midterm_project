@@ -152,7 +152,7 @@ switch($method) {
                 echo json_encode(['message' => 'No Quotes Found']);
             }
         } else {
-            echo json_encode(['message' => 'No Quotes Found']);
+            echo json_encode(['message' => 'Missing Required Parameters']);
         }
         break;
 
